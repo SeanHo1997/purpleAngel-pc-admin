@@ -1,11 +1,10 @@
 import axios from 'axios'
-import { ElNotification } from 'element-plus';
+import { ElNotification } from 'element-plus'
 import { useCookies } from '@vueuse/integrations/useCookies'
-import { TOKEN } from '@/constants';
-import store from '@/store';
+import { TOKEN } from '@/constants'
 
 const service = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000
 })
 

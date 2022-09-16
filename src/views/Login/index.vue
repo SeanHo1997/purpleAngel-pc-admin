@@ -88,18 +88,16 @@
             username: form.username,
             password: form.password,
           }).then(() => {
-            store.dispatch('user/getUserInfo')
-          }).then(() => {
-            router.push('/')
-            // 拿到token和info后
-            ElNotification({
-              message: '登录成功',
-              type: 'success',
-              duration: 3000,
+            store.dispatch('user/getUserInfo').then(() => {
+              router.push('/')
+              // 拿到token和info后
+              ElNotification({
+                message: '登录成功',
+                type: 'success',
+                duration: 3000,
+              })
+              loading.value = false
             })
-          })
-          .finally(() => {
-            loading.value = false
           })
       } else {
         console.log('验证失败')

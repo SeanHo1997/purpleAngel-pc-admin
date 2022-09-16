@@ -28,9 +28,9 @@
           <el-avatar
             class="mr-2"
             :size="25"
-            :src="avatar" />
+            :src="$store.getters.userInfo.avatar || 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'" />
           <div class="text-indigo-100">
-            {{ $store.state.user.userInfo.username }}
+            {{ $store.getters.userInfo.username }}
           </div>
           <el-icon class="el-icon-right">
             <arrow-down />
@@ -98,7 +98,6 @@
   const store = useStore()
   const router = useRouter()
   const {isFullscreen, toggle} = useFullscreen()
-  const avatar = store.getters.avatar || 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
 
   const dialogVisible = ref(false)
 

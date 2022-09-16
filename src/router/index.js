@@ -1,18 +1,6 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const cosntantRoutes = [
-  {
-    path: '/',
-    component: () => import('@/views/layout/index.vue'),
-    children: [
-      {
-        path: '/',
-        name: 'admin',
-        component: () => import('@/views/index/index.vue'),
-        meta: { title: '首页' }
-      }
-    ]
-  },
   {
     path: '/login',
     name: 'login',
@@ -23,12 +11,24 @@ const cosntantRoutes = [
     name: '404',
     component: () => import('../views/404/index.vue'),
     meta: { title: '404' }
+  },
+  {
+    path: '',
+    component: () => import('@/views/layout/index.vue'),
+    children: [
+      {
+        path: '',
+        name: '',
+        component: () => import('@/views/index/index.vue'),
+        meta: { title: '首页' }
+      }
+    ]
   }
 ]
 
 const asyncRoutes = [
   {
-    path: '/',
+    path: '',
     component: () => import('@/views/layout/index.vue'),
     children: [
       {
@@ -58,7 +58,7 @@ const asyncRoutes = [
       {
         path: '/comment/list',
         name: '/comment/list',
-        component: () => import('@/views/Comments/index.vue'),
+        component: () => import('@/views/GoodsComment/index.vue'),
         meta: { title: '评论管理 ' }
       },
       {
@@ -150,7 +150,7 @@ const asyncRoutes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [...cosntantRoutes, ...asyncRoutes]
 })
 
