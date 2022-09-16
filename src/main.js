@@ -15,8 +15,10 @@ import store from './store/index'
 // 组件
 import components from './components/index'
 // 指令
-import permission from './directives/permission'
+import directives from './directives/permission'
 import 'default-passive-events'
+// 路由守卫
+import './permission'
 
 const app = createApp(App)
 
@@ -29,5 +31,5 @@ app.use(router)
 app.use(store)
 app.use(components)
 // 指令
-app.use(permission)
+app.use(directives)
 app.mount('#app')
