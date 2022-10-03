@@ -126,9 +126,9 @@
         <el-table-column label="操作" align="center">
           <template #default="{row}">
             <el-button class="px-1" type="primary" size="small" text @click="openDetail(row)">订单详情</el-button>
-            <el-button v-if="searchForm.tab === 'noship'" class="px-1" type="primary" size="small" text @click="shipOrderHandler(row.id)">订单发货</el-button>
-            <el-button v-if="searchForm.tab === 'refunding'" class="px-1" type="primary" size="small" text @click="handleRefund(row.id, 1)">同意退款</el-button>
-            <el-button v-if="searchForm.tab === 'refunding'" class="px-1" type="primary" size="small" text @click="handleRefund(row.id, 0)">拒绝退款</el-button>
+            <el-button v-if="searchForm.tab === 'noship'" class="px-1" type="success" size="small" text @click="shipOrderHandler(row.id)">去发货</el-button>
+            <el-button v-if="searchForm.tab === 'refunding'" class="px-1" type="success" size="small" text @click="handleRefund(row.id, 1)">同意退款</el-button>
+            <el-button v-if="searchForm.tab === 'refunding'" class="px-1" type="danger" size="small" text @click="handleRefund(row.id, 0)">拒绝退款</el-button>
           </template>
         </el-table-column>
       </el-table>

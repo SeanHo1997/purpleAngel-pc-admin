@@ -1,14 +1,22 @@
 import service from '@/utils/request'
 
-// const queryFn = (queryParams) => {
-
-// }
+const queryParams = (query) => {
+  let q = []
+  for (const key in query) {
+    q.push(key + '=' + query[key])
+  }
+  let res = q ? ('?' + q.join('&')) : ''
+  return res
+}
 
 // 商品评价列表
-export const goodsCommentList = (page) => {
+export const goodsCommentList = (page, title) => {
+  let url = `/admin/goods_comment/${page}?title=${title}`
+  if (title === '' || title === null) {
+    url = `/admin/goods_comment/${page}`
+  }
   return service({
-    url: `/admin/goods_comment/${page}`
-    // ?title=${title}
+    url
   })
 }
 

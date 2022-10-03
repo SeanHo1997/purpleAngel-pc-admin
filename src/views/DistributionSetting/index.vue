@@ -18,8 +18,8 @@
           v-model="form.store_first_rebate"
           type="number"
           placeholder="一级返佣比例"
-          style="width: 50%"><template #append>%</template></el-input>
-          <small class="ml-2 text-gray-500">订单交易成功后给上级返佣的比例0-100</small>
+          style="width: 35%"><template #append>%</template></el-input>
+          <small class="ml-2 text-gray-500">订单交易成功后给上级返佣的比例0-100%</small>
         </div>
       </el-form-item>
       <el-form-item label="二级返佣比例">
@@ -28,8 +28,8 @@
           v-model="form.store_second_rebate"
           type="number"
           placeholder="二级返佣比例"
-          style="width: 50%"><template #append>%</template></el-input>
-          <small class="ml-2 text-gray-500">订单交易成功后给上级返佣的比例0-100</small>
+          style="width: 35%"><template #append>%</template></el-input>
+          <small class="ml-2 text-gray-500">订单交易成功后给上级返佣的比例0-100%</small>
         </div>
       </el-form-item>
       <el-form-item label="自购返佣">
@@ -77,8 +77,8 @@
   const loading = ref(false)
   const form = reactive({
     distribution_open: 1, //分销启用:0禁用1启用
-    store_first_rebate: 10, //一级返佣比例：0~100
-    store_second_rebate: 20, //二级返佣比例：0~100
+    store_first_rebate: 10, //一级返佣比例：0~100%
+    store_second_rebate: 20, //二级返佣比例：0~100%
     spread_banners: [
       'http://tangzhe123-com.oss-cn-shenzhen.aliyuncs.com/public/62710076cd93e.png',
     ], //分销海报图

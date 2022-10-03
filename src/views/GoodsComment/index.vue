@@ -155,7 +155,7 @@
   // 搜索
   const searchWord = ref('')
   const searchHandler = () => {
-    getTableList(currentPage.value, searchWord.value)
+    getTableList(currentPage.value, (searchWord.value).trim())
   }
   // 重置搜索
   const resetSearchHandler = () => {
@@ -171,9 +171,9 @@
   const pageSize = ref(10)
   // 获取列表数据
   const tableData = ref([])
-  const getTableList = async (page) => {
+  const getTableList = async (page, searchWord = '') => {
     loading.value = true
-    const res = await goodsCommentList(page)
+    const res = await goodsCommentList(page, searchWord)
     tableData.value = res.list
     total.value = res.totalCount
     loading.value = false
@@ -193,6 +193,7 @@
   const replyHandler = (id) => {
     replyGoodsComment(id, formData).then(() => {
       resetFormData()
+      textAreaVisible.value = false
       getTableList(currentPage.value)
       ElNotification({
         type: 'success',

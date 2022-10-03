@@ -40,7 +40,7 @@
   </el-main>
 
   <!-- 上传图片 -->
-  <FormDrawer :drawerVisible="drawerVisible" title="上传图片" @confirm="confirmDrawer">
+  <FormDrawer :drawerVisible="drawerVisible" title="上传图片" @confirm="confirmDrawer" @close="drawerVisible = false">
     <ImageUpload :data="activeId.value" @success="successUpload"></ImageUpload>
   </FormDrawer>
 </template>

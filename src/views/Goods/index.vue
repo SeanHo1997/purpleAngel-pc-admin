@@ -37,12 +37,13 @@
       </MSearch>
       <el-divider></el-divider>
       <ListHeader
+        :firstButtonText="searchForm.tab !== 'delete' ? '新增' : '恢复商品'"
         @add="openDrawer"
         @refresh="refresh"
         showSec
         @secHandler="updateBundleFn"
-        SecButtonText="批量上架"
-        secConfirmTitle="上架"
+        :SecButtonText="searchForm.tab !== 'delete' ? '批量上架' : '彻底删除'"
+        secConfirmTitle="彻底删除"
         :selection="ids">
         <el-button
           v-if="searchForm.tab === 'all' || searchForm.tab === 'off'"
@@ -216,8 +217,7 @@
         </el-form-item>
         <el-form-item prop="cover" label="商品封面">
           <ChooseImage
-            v-model="formData.cover"
-            @avatar="avatarHandler"></ChooseImage>
+            v-model="formData.cover" :additable="false"></ChooseImage>
         </el-form-item>
         <el-form-item prop="desc" label="商品描述">
           <el-input v-model="formData.desc"></el-input>
@@ -307,6 +307,8 @@
     updateGoods,
     delGoods,
     updateBundle,
+    restoreGoods,
+    destoryGoods
   } from '@/api/goods'
   import {goodsCate} from '@/api/category'
   import {ElNotification} from 'element-plus'
@@ -396,16 +398,15 @@
     formData.min_oprice = 100
   }
 
-  // 封面
-  const avatarHandler = (cover) => {
-    formData.cover = cover
-  }
-
   // 新增
   const openDrawer = () => {
-    isEditId.value = 0
-    resetFormData()
-    drawerVisible.value = true
+    if(searchForm.tab !== 'delete') {
+      isEditId.value = 0
+      resetFormData()
+      drawerVisible.value = true
+    } else {
+      restoreBundle()
+    }
   }
 
   // 确认新增
@@ -473,16 +474,21 @@
     ids.value = e.map((item) => item.id)
   }
   const updateBundleFn = () => {
-    updateBundle(ids.value, 1).then(() => {
-      ElNotification({
-        type: 'success',
-        message: '上架成功',
+    if(searchForm.tab !== 'delete') {
+      updateBundle(ids.value, 1).then(() => {
+        ElNotification({
+          type: 'success',
+          message: '上架成功',
+        })
       })
-    })
+    } else {
+      destroyBundle()
+    }
   }
   // 上架
   const statusOn = () => {
     updateBundle(ids.value, 1).then(() => {
+      getTableList(currentPage.value)
       ElNotification({
         type: 'success',
         message: '上架成功',
@@ -492,6 +498,7 @@
   // 下架
   const statusOff = () => {
     updateBundle(ids.value, 0).then(() => {
+      getTableList(currentPage.value)
       ElNotification({
         type: 'success',
         message: '下架成功',
@@ -527,6 +534,31 @@
   // 提交商品规格
   const afterSubmitSkus = () => {
     getTableList(currentPage.value)
+  }
+
+  // 批量恢复
+  const restoreBundle = () => {
+    loading.value = true
+    restoreGoods(ids.value).then(() => {
+      loading.value = false
+      ElNotification({
+        type: 'success',
+        message: '恢复成功',
+      })
+      getTableList(currentPage.value)
+    })
+  }
+  // 批量删除
+  const destroyBundle = () => {
+    loading.value = true
+    destoryGoods(ids.value).then(() => {
+      loading.value = false
+      ElNotification({
+        type: 'success',
+        message: '彻底删除成功'
+      })
+      getTableList(currentPage.value)
+    })
   }
 </script>
 

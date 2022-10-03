@@ -3,9 +3,10 @@
     :default-active="$route.path"
     class="aside"
     :collapse="$store.getters.isCollapse"
-    :style="{width: $store.getters.isCollapse ? '64px' : '250px'}"
+    :style="{ width: $store.getters.isCollapse ? '64px' : '250px' }"
     :unique-opened="true"
-    router>
+    router
+    :collapse-transition="false">
     <template v-if="$store.getters.userInfo.menus">
       <div>
         <template
@@ -42,11 +43,21 @@
 
 <style>
   .aside {
-    width: 250px;
     @apply shadow-md fixed h-screen bg-light-50 bottom-0 left-0 overflow-auto border-0;
     top: 64px;
   }
+
   ::-webkit-scrollbar {
     border: 0px;
+  }
+
+
+  /*隐藏文字*/
+  .el-menu--collapse  .el-sub-menu__title span {
+    display: none;
+  }
+  /*隐藏 > */
+  .el-menu--collapse  .el-sub-menu__title .el-sub-menu__icon-arrow {
+    display: none;
   }
 </style>

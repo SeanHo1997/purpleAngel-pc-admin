@@ -1,11 +1,11 @@
 <template>
   <el-drawer title="订单详情" v-model="drawerVisible" size="50%" destroy-on-close>
-    <el-card shadow="never">
+    <el-card shadow="never" class="mb-5">
       <template #header>
         <b class="text-sm">订单信息</b>
       </template>
       <!-- card body -->
-      <el-form label-width="80px">
+      <el-form>
         <el-form-item label="订单号">{{ detail.no }}</el-form-item>
         <el-form-item label="付款方式">{{ detail.payment_method }}</el-form-item>
         <el-form-item label="付款时间">{{ detail.paid_time }}</el-form-item>

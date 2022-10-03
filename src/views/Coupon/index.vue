@@ -19,7 +19,7 @@
       </el-table-column>
       <el-table-column prop="type" label="优惠类型">
         <template #default="{ row }">
-          <el-tag>{{ row.type === 0 ? '满减' : '折扣' }} {{ row.type ? '￥'+row.value : row.value }}</el-tag>
+          <el-tag>{{ row.type === 0 ? `满减￥${row.value}` : `折扣${(10 - row.value) * 10}%` }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="total" label="发行数量">

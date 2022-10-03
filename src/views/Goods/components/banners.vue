@@ -6,7 +6,7 @@
         <ChooseImage v-model="formData.banners"></ChooseImage>
       </el-form-item>
       <el-form-item>
-        <div class="flex justify-evenly">
+        <div class="w-[100%] flex justify-evenly mt-7">
           <el-button type="primary" @click="submit">提交</el-button>
           <el-button>取消</el-button>
         </div>

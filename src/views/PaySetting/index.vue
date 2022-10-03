@@ -57,7 +57,7 @@
     </el-form>
 
     <FormDrawer ref="formDrawerRef" @confirm="submit" :drawerVisible="drawerVisible" title="支付">
-      <el-form v-if="drawerType === '支付宝支付'" :model="form" label-width="80px">
+      <el-form v-if="drawerType === '支付宝支付'" :model="form" label-width="100px">
         <el-form-item label="app_id">
           <el-input v-model="form.alipay.app_id" placeholder="app_id"></el-input>
         </el-form-item>
@@ -68,7 +68,7 @@
           <el-input v-model="form.alipay.private_key" placeholder="private_key" type="textarea" rows="4"></el-input>
         </el-form-item>
       </el-form>
-      <el-form v-else :model="form" label-width="80px">
+      <el-form v-else :model="form" label-width="150px">
         <el-form-item label="公众号App ID">
           <el-input v-model="form.wxpay.app_id" placeholder="app_id"></el-input>
         </el-form-item>

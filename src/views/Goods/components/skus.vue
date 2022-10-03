@@ -44,24 +44,19 @@
       </template>
       <!-- 多规格 -->
       <template v-else>
-        <SkuCard></SkuCard>
+        <SkuCard :goodsId="goodsId"></SkuCard>
       </template>
     </el-form>
   </FormDrawer>
 </template>
 
 <script setup>
-  import {ref, reactive, onMounted} from 'vue'
+  import {ref, reactive} from 'vue'
   import {readGoods} from '@/api/goods'
-  import {updateGoodsSku, addSkuItem} from '@/api/sku'
-  import {ElNotification} from 'element-plus'
   import SkuCard from './sku/skucard.vue'
   import {
-    goodsSkusList,
-    goodsId,
-    addSkuHandler
+    goodsSkusList
   } from '@/composable/useSku'
-import bus from '@/utils/mitt'
 
   const emit = defineEmits(['submited'])
 
@@ -78,6 +73,7 @@ import bus from '@/utils/mitt'
   })
 
   // 打开drawer
+  const goodsId = ref(0)
   const openDrawer = (row) => {
     goodsId.value = row.id
     readGoodsDetail(row.id)
@@ -102,15 +98,9 @@ import bus from '@/utils/mitt'
 
   // 提交添加
   const submit = () => {
-    addSkuHandler()
     emit('submited')
     drawerVisible.value = false
   }
-
-  // onMounted(() => {
-  //   bus.on('refreshSkuItemValue', () => {
-  //   })
-  // })
 
   defineExpose({
     openDrawer,

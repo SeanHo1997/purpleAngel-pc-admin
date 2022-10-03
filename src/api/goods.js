@@ -84,3 +84,34 @@ export const goodsCarousel = (id, data) => {
     data
   })
 }
+
+// 选择sku规格值
+export const chooseSkuNSetSkuCard = (id, data) => {
+  return service({
+    url: `/admin/goods_skus_card/${id}/set`,
+    method: 'post',
+    data
+  })
+}
+
+// 恢复删除商品
+export const restoreGoods = (ids) => {
+  return service({
+    url: `/admin/goods/restore`,
+    method: 'post',
+    data: {
+      ids
+    }
+  })
+}
+
+// 彻底删除商品
+export const destoryGoods = (ids) => {
+  return service({
+    url: `/admin/goods/destroy`,
+    method: 'post',
+    data: {
+      ids
+    }
+  })
+}

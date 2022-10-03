@@ -12,16 +12,18 @@
           <span>{{ data.name }}</span>
         </div>
         <div class="ml-auto">
-          <el-switch v-model="data.status" :active-value="1" :inactive-value="0" @change="changeStatus($event, data)"></el-switch>
+          <span @click.stop>
+            <el-switch v-model="data.status" :active-value="1" :inactive-value="0" @change="changeStatus($event, data)"></el-switch>
+          </span>
           <el-button text type="primary" @click.stop="editFn(data)">修改</el-button>
-          <el-button text type="primary">增加</el-button>
+          <!-- <el-button text type="primary">增加</el-button> -->
           <el-popconfirm
               title="确认删除此管理员吗?"
               confirm-button-text="确定"
               cancel-button-text="取消"
               @confirm.stop="confirmDel(data)">
               <template #reference>
-                <el-button text type="primary">删除</el-button>
+                <el-button text type="primary" @click.stop>删除</el-button>
               </template>
             </el-popconfirm>
         </div>

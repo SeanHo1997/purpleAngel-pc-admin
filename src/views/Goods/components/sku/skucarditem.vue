@@ -4,34 +4,26 @@
     :key="sku.value"
     class="mx-1"
     closable
-    :disable-transitions="false"
     @close="handleClose(sku.id)">
     <!-- {{ sku.value }} -->
-    <el-input v-model="sku.value" placeholder="选项值" size="small" @change="handleChange(sku)"></el-input>
+    <el-input :disabled="editStatus === false" v-model="sku.value" placeholder="选项值" size="small" @change="handleChange(sku)"></el-input>
   </el-tag>
   <el-input
     v-if="inputVisible"
     ref="InputRef"
+    :disabled="editStatus === false"
     v-model="inputValue"
     class="ml-1 w-20"
     size="small"
     @keyup.enter="handleInputConfirm(props.skuItem.id, props.skuItem.name)"
     @blur="handleInputConfirm(props.skuItem.id, props.skuItem.name)" />
-  <el-button v-else class="button-new-tag ml-1" size="small" @click="showInput">
+  <el-button v-else class="button-new-tag ml-1" size="small" @click="showInput" :disabled="editStatus === false">
     新增规格值
   </el-button>
 </template>
 
 <script setup>
   import { nextTick, ref } from 'vue'
-  // import {
-  //   inputValue,
-  //   inputVisible,
-  //   InputRef,
-  //   handleClose,
-  //   showInput,
-  //   handleInputConfirm
-  // } from '@/composable/useSku'
   import { addSkuItemValue, updateSkuItemValue, deleteSkuItemValue } from '@/api/sku'
   import { ElNotification } from 'element-plus'
 
@@ -39,6 +31,10 @@
     skuItem: {
       type: Object,
       required: true,
+    },
+    editStatus: {
+      type: Boolean,
+      required: true
     }
   })
 

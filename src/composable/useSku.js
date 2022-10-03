@@ -1,60 +1,10 @@
-import { reactive, ref, nextTick } from 'vue'
-import { addSkuItem, updateSkuItem, deleteSkuItem, sortSkuItem, addSkuItemValue, updateSkuItemValue, deleteSkuItemValue } from '@/api/sku'
+import { reactive, ref } from 'vue'
+import { sortSkuItem, addSkuItemValue, updateSkuItemValue, deleteSkuItemValue } from '@/api/sku'
 import { ElNotification } from 'element-plus'
+import { chooseSkuNSetSkuCard } from '@/api/goods'
 
 export const goodsSkusList = ref([])
-export const goodsId = ref(0)
-
-// 添加商品规格
-export const addSkuData = reactive({
-  goods_id: 0, //商品ID
-  name: '', //规格名称
-  order: 50, //排序
-  type: 0 //规格类型 0文字
-})
-
-// 添加规格
-export const onaddingSku = () => {
-  // 此时赋值id才有效
-  addSkuData.goods_id = goodsId.value
-  goodsSkusList.value.push(addSkuData)
-}
-
-// 确认添加规格
-export const addSkuHandler = async () => {
-  const res = await addSkuItem(addSkuData)
-  goodsSkusList.value.push({
-    ...res,
-    goodsSkusCardValue: []
-  })
-  ElNotification({
-    message: '添加规格成功',
-    type: 'success'
-  })
-}
-
-// 修改商品规格
-export const updateSkuItemHandler = async (item) => {
-  addSkuData.goods_id = item.goods_id
-  addSkuData.name = item.name
-  addSkuData.order = item.order
-
-  await updateSkuItem(item.id, addSkuData)
-  ElNotification({
-    message: '修改规格成功',
-    type: 'success'
-  })
-}
-
-// 删除商品规格
-export const deleteSkuHandler = async (id) => {
-  await deleteSkuItem(id)
-
-  ElNotification({
-    message: '删除规格成功',
-    type: 'success'
-  })
-}
+export const editStatus = ref(false)
 
 const swapArray = (arr, i1, i2) => {
   // const tempItem = arr[i1]
@@ -68,20 +18,20 @@ const swapArray = (arr, i1, i2) => {
 
 // 上一项
 const moveUp = (arr, i) => {
-  swapArray(arr, i, i - 1)
+  return swapArray(arr, i, i - 1)
 }
 
 // 下一项
 const moveDown = (arr, i) => {
-  swapArray(arr, i, i + 1)
+  return swapArray(arr, i, i + 1)
 }
 
 // 排序规格选项
 export const sortCard = (action, i) => {
   if (action === 'up') {
-    moveUp(goodsSkusList.value, i)
+    goodsSkusList.value = moveUp(goodsSkusList.value, i)
   } else {
-    moveDown(goodsSkusList.value, i)
+    goodsSkusList.value = moveDown(goodsSkusList.value, i)
   }
 
   const clonedList = goodsSkusList.value.map((item, index) => {
@@ -95,6 +45,23 @@ export const sortCard = (action, i) => {
     ElNotification({
       message: '排序成功',
       type: 'success'
+    })
+  })
+}
+
+// 设置选择规格
+const loading = ref(false)
+export const chooseSkuNSetSkuCardHanlder = (id, data) => {
+  const item = goodsSkusList.value.find(item => item.id === id)
+  loading.value = true
+  chooseSkuNSetSkuCard(id, data).then(res => {
+    console.log(res)
+    item.name = item.text = res.goods_skus_card.name
+    item.goodsSkusCardValue = res.goods_skus_card_value.map(o => {
+      o.text = o.value || '属性值'
+      return o
+    }).fianlly(() => {
+      loading.value = false
     })
   })
 }

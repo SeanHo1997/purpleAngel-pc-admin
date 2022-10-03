@@ -4,8 +4,7 @@
       <div
         v-for="image in props.modelValue"
         :key="image"
-        class="wrapper relative left-0 right-0 top-0 bottom-0"
-        >
+        class="wrapper relative left-0 right-0 top-0 bottom-0 mx-2">
         <el-image
           :src="image"
           fit="cover"
@@ -14,14 +13,13 @@
         ></el-image>
         <el-icon
           class="absolute right-[5px] top-[5px] cursor-pointer bg-light-800 rounded-full z-100"
-          @click="removeImage(image)"
-          ><CircleClose/>
+          @click="removeImage(image)"><CircleClose/>
         </el-icon>
       </div>
     </div>
     <div v-else-if="props.modelValue !== '' && preview" class="flex flex-wrap">
       <div
-        class="choose-image-btn absolute left-0 right-0 top-0 bottom-0"
+        class="choose-image-btn relative left-0 right-0 top-0 bottom-0 mr-2"
         >
         <el-image
           :src="props.modelValue"
@@ -37,17 +35,17 @@
         </el-icon>
       </div>
     </div>
-    <div v-if="preview" class="choose-image-btn" @click="open">
+    <div v-if="additable" class="choose-image-btn" @click="open">
       <el-icon :size="25" class="text-gray-500"><Plus /></el-icon>
     </div>
 
     <el-dialog title="选择图片" v-model="dialogVisible" width="80%">
       <ImageMaterial showCheckBox></ImageMaterial>
       <template #footer>
-        <span class="flex justify-evenly">
+        <div class="flex justify-evenly">
           <el-button @click="dialogVisible = false">取消</el-button>
           <el-button type="primary" @click="confirm">确认</el-button>
-        </span>
+        </div>
       </template>
     </el-dialog>
   </div>
@@ -65,6 +63,10 @@
       default: () => { [] }
     },
     preview: {
+      type: Boolean,
+      default: true
+    },
+    additable: {
       type: Boolean,
       default: true
     }

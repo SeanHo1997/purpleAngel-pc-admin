@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <div>
     <el-header>
       <MyHeader/>
     </el-header>
@@ -11,13 +11,15 @@
         <MyTabsList></MyTabsList>
         <!-- 二级路由 -->
         <router-view v-slot="{ Component }">
-          <transition name="fade">
-            <component :is="Component"></component>
-          </transition>
+          <Transition name="fade">
+            <keep-alive>
+              <component :is="Component"></component>
+            </keep-alive>
+          </Transition>
         </router-view>
       </el-main>
     </el-container>
-  </el-container>
+  </div>
 </template>
 
 <script setup>
@@ -27,17 +29,19 @@ import MyTabsList from '@/views/layout/components/MyTabsList.vue'
 </script>
 
 <style scoped>
-  .fade-enter-to,
-  .fade-leave-from,
   .fade-enter-active,
   .fade-leave-active {
-    opacity: 1;
-    transition: all .3s;
+    transition: all .5s;
   }
 
-  .fade-enter-from,
+  .fade-enter-from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
   .fade-leave-to {
     opacity: 0;
+    transform: translateX(30px);
   }
 </style>
   

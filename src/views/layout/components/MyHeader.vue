@@ -4,7 +4,7 @@
       <el-icon class="mr-1">
         <eleme-filled />
       </el-icon>
-      电商后台管理系统
+      蓝精灵后台管理系统
     </span>
     <el-tooltip effect="dark" content="折叠" placement="bottom-start">
       <el-icon class="icon-btn" @click="toggleCollapse">

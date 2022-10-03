@@ -11,11 +11,11 @@
   >
     <el-icon class="el-icon--upload"><upload-filled /></el-icon>
     <div class="el-upload__text">
-      Drop file here or <em>click to upload</em>
+      将图片拖拽至此或者<em>点击此处上传</em>
     </div>
     <template #tip>
       <div class="el-upload__tip">
-        jpg/png files with a size less than 500kb
+        只支持jpg/png格式,且图片大小上线为500KB
       </div>
     </template>
   </el-upload>
@@ -23,7 +23,7 @@
 
 <script setup>
 import { imageUploadAction } from '@/api/imageMaterial'
-import { useStore } from 'vuex';
+import { useStore } from 'vuex'
 import { computed } from 'vue'
 const store = useStore()
 

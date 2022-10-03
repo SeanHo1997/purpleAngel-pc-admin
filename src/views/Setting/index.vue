@@ -34,7 +34,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="Bucket">
-            <el-input v-model="form.upload_config.Bucket" placeholder="密码最小长度" style="width: 30%;"></el-input>
+            <el-input v-model="form.upload_config.Bucket" placeholder="存储桶名称" style="width: 30%;"></el-input>
           </el-form-item>
           <el-form-item label="ACCESS_KEY">
             <el-input v-model="form.upload_config.ACCESS_KEY" placeholder="密码最小长度" style="width: 30%;"></el-input>

@@ -16,7 +16,7 @@ service.interceptors.request.use(config => {
   }
   return config
 }, err => {
-  Promise.reject(err)
+  return Promise.reject(err)
 })
 
 service.interceptors.response.use(response => {
@@ -27,7 +27,7 @@ service.interceptors.response.use(response => {
     type: 'error',
     duration: 3000
   })
-  Promise.reject(err)
+  return Promise.reject(err)
 })
 
 export default service

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Penals />
+    <!-- <Penals /> -->
     <el-card shadow="never" class="border-0">
     <!-- 搜索关键词 -->
     <div class="flex items-center justify-between mb-4">
