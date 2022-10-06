@@ -14,6 +14,7 @@
           <el-radio :label="1">多规格</el-radio>
         </el-radio-group>
       </el-form-item>
+
       <!-- 单规格 -->
       <template v-if="formData.sku_type === 0">
         <el-form-item label="市场价格">
@@ -42,6 +43,7 @@
           >
         </el-form-item>
       </template>
+      
       <!-- 多规格 -->
       <template v-else>
         <SkuCard :goodsId="goodsId"></SkuCard>

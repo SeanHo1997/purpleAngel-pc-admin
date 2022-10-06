@@ -5,7 +5,7 @@
     :size="size"
     :title="title"
     :direction="direction"
-    @close="closeFn"
+    @close="closeDrawer"
     :destroy-on-close="destroyOnClose">
     <div class="drawer">
       <div class="body">
@@ -45,7 +45,7 @@
       default: false
     }
   })
-  const emit = defineEmits(['confirm', 'close'])
+  const emit = defineEmits(['confirm', 'update:drawerVisible'])
 
   const direction = ref('rtl')
 
@@ -55,15 +55,11 @@
   }
   // 取消
   const closeDrawer = () => {
-    emit('close')
-  }
-
-  const closeFn = () => {
-    emit('close')
+    emit('update:drawerVisible', false)
   }
 </script>
 
-<style>
+<style scoped >
   .drawer {
     @apply flex flex-col;
   }

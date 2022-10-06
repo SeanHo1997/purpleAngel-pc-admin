@@ -4,8 +4,8 @@
       <template #header>
         <div class="flex items-center">
           <!-- 规格名称 -->
-          <!-- <el-input :disabled="editStatus === false" :placeholder="item.name" v-model="item.name"><template #append><el-icon @click="chooseSkuHandler(item)" class="hover:(bg-gray-50)"><more/></el-icon></template> -->
-          <!-- </el-input> -->
+          <el-input :disabled="editStatus === false" :placeholder="item.name" v-model="item.name"><template #append><el-icon @click="chooseSkuHandler(item)" class="hover:(bg-gray-50)"><more/></el-icon></template>
+          </el-input>
           <!-- 上一项 -->
           <el-button size="small" @click="sortCard('up', index)" class="mx-3" :disabled="index === 0"><el-icon><Top/></el-icon></el-button>
           <!-- 下一项 -->

@@ -1,59 +1,59 @@
 <template>
   <div>
     <el-card shadow="never" class="border-0">
-    <!-- 新增|刷新 -->
-    <ListHeader @add="openDrawer" @refresh="refresh" showSec SecButtonText="批量删除" @secHandler="deleteBundle" :selection="ids"></ListHeader>
-    <!-- 表格 -->
-    <el-table :data="tableData" style="width: 100%" stripe v-loading="loading" @selection-change="changeSelection">
-      <el-table-column type="selection" prop="name">
-      </el-table-column>
-      <el-table-column prop="name" label="规格名称">
-      </el-table-column>
-      <el-table-column prop="default" label="规格值">
-      </el-table-column>
-      <el-table-column prop="order" label="排序">
-      </el-table-column>
-      <el-table-column prop="status" label="状态">
-        <template #default="{row}">
-          <el-switch
-            v-model="row.status"
-            :active-value="1"
-            :inactive-value="0"
-            @change="changeStatus($event, row.id)"
-            :disabled="row.super === 1" />
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" width="220" align="center">
-        <template #default="{row}">
-          <small v-if="row.super === 1">暂无操作</small>
-          <div v-else>
-            <el-button type="primary" size="small" text @click="editFn(row)"
-              >修改</el-button
-            >
-            <el-popconfirm
-              title="确认删除规格吗?"
-              confirm-button-text="确定"
-              cancel-button-text="取消"
-              @confirm="confirmDel(row)">
-              <template #reference>
-                <el-button type="primary" size="small" text>删除</el-button>
-              </template>
-            </el-popconfirm>
-          </div>
-        </template>
-      </el-table-column>
-    </el-table>
-    <!-- 分页 -->
-    <el-row class="flex justify-center items-center mt-3">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="total"
-        :curren-page="currentPage"
-        :page-size="pageSize"
-        @current-change="getTableList(currentPage)">
-      </el-pagination>
-    </el-row>
+      <!-- 新增|刷新 -->
+      <ListHeader @add="openDrawer" @refresh="refresh" showSec SecButtonText="批量删除" @secHandler="deleteBundle" :selection="ids"></ListHeader>
+      <!-- 表格 -->
+      <el-table :data="tableData" style="width: 100%" stripe v-loading="loading" @selection-change="changeSelection">
+        <el-table-column type="selection" prop="name">
+        </el-table-column>
+        <el-table-column prop="name" label="规格名称">
+        </el-table-column>
+        <el-table-column prop="default" label="规格值">
+        </el-table-column>
+        <el-table-column prop="order" label="排序">
+        </el-table-column>
+        <el-table-column prop="status" label="状态">
+          <template #default="{row}">
+            <el-switch
+              v-model="row.status"
+              :active-value="1"
+              :inactive-value="0"
+              @change="changeStatus($event, row.id)"
+              :disabled="row.super === 1" />
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="220" align="center">
+          <template #default="{row}">
+            <small v-if="row.super === 1">暂无操作</small>
+            <div v-else>
+              <el-button type="primary" size="small" text @click="editFn(row)"
+                >修改</el-button
+              >
+              <el-popconfirm
+                title="确认删除规格吗?"
+                confirm-button-text="确定"
+                cancel-button-text="取消"
+                @confirm="confirmDel(row)">
+                <template #reference>
+                  <el-button type="primary" size="small" text>删除</el-button>
+                </template>
+              </el-popconfirm>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- 分页 -->
+      <el-row class="flex justify-center items-center mt-3">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="total"
+          :curren-page="currentPage"
+          :page-size="pageSize"
+          @current-change="getTableList(currentPage)">
+        </el-pagination>
+      </el-row>
     </el-card>
 
     <FormDrawer

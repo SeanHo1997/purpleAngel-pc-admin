@@ -521,6 +521,7 @@
   const openGoodsDetailDrawer = (row) => {
     goodsDetailRef.value.openDrawer(row)
   }
+  
   // 提交商品详情
   const afterSubmitGoodsDetail = () => {
     getTableList(currentPage.value)
